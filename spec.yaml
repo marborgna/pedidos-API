@@ -9,6 +9,7 @@ servers:
 
 paths:
   /pedido:
+
     get: 
       summary: Detalle del pedido
       operationId: getPedido
@@ -32,9 +33,6 @@ paths:
           description: Invalid status value
           content: {}
 
-#MODIFICAR ESTE POST, SOLO MAQUETA 
-#UN PAREMTRO ES LISTA DE PRODUCTOS
-
     post:
       summary: Crear pedido nuevo
       requestBody:
@@ -47,6 +45,9 @@ paths:
               properties:
                 payment:
                   type: string
+                idUsuarix:
+                  type: integer
+
 
       responses:
         200:
@@ -91,6 +92,7 @@ paths:
           content: {}
 
   /login:
+
     post: 
       summary: Identificador usuarix (user or mail, password)
       requestBody:
@@ -122,6 +124,7 @@ paths:
           content: {}
           
   /sign-up:
+
     post: 
       summary: Envío de datos de Usuarix (user, password, nombre, mail, telefono, direccion)
       requestBody:
@@ -165,6 +168,7 @@ paths:
           content: {}
 
   /pedidosUsuarix:
+
     get: 
       summary: Lista pedidos del Usuarix
       operationId: getPedidos
@@ -188,7 +192,6 @@ paths:
           description: Invalid status value
           content: {}
 
-#PRODUCTO CON POST GET PUT DELETE
 
   /producto:
     
@@ -341,16 +344,21 @@ components:
           type: integer
         description:
           type: string
-        timestamp:
+        creationDate:
           type: string
         state:
           type: string
-        payment:
+        paymentType:
           type: string
         productos:
           type: array
-          items: 
-            $ref: '#/components/schemas/Producto'
+          items:
+            type: object
+            properties:
+              quantity:
+                type: integer
+              idProducto:
+                type: integer
 
          
  
