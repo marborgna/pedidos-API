@@ -1,0 +1,356 @@
+
+openapi: 3.0.1
+info:
+  title: DWFS_ONLINE-54
+  description: 'Proyecto 3 DWFS'
+  version: 1.0.0
+servers:
+- url: http://localhost:3000 
+
+paths:
+  /pedido:
+    get: 
+      summary: Detalle del pedido
+      operationId: getPedido
+      parameters:
+        - in: query
+          name: idPedido
+          schema:
+            type: integer 
+          required: true
+          description: Id del pedido
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Pedido'
+        400:
+          description: Invalid status value
+          content: {}
+
+#MODIFICAR ESTE POST, SOLO MAQUETA 
+#UN PAREMTRO ES LISTA DE PRODUCTOS
+
+    post:
+      summary: Crear pedido nuevo
+      requestBody:
+        description: Crear pedido nuevo
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                payment:
+                  type: string
+
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idPedido:
+                    type: integer
+                  answer:
+                    type: boolean
+        400:
+            description: Invalid status value
+            content: {}
+
+          
+  /estadoPedido:
+
+    put:
+      summary: Actualiza el estado del pedido
+      requestBody:
+        description: Data del pedido
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                id:
+                  type: integer
+                state:
+                  type: string
+        
+      responses:
+        200:
+          description: successful operation
+          content: {}
+        400:
+          description: Invalid status value
+          content: {}
+
+  /login:
+    post: 
+      summary: Identificador usuarix (user or mail, password)
+      requestBody:
+        description: login usuarix
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                identifier:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ideUser:
+                    type: integer
+                  answer:
+                    type: boolean
+        400:
+          description: Invalid status value
+          content: {}
+          
+  /sign-up:
+    post: 
+      summary: Envío de datos de Usuarix (user, password, nombre, mail, telefono, direccion)
+      requestBody:
+        description: login usuarix
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                user:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                mail:
+                  type: string
+                phone:
+                  type: string
+                address:
+                  type: string
+                
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ideUser:
+                    type: integer
+                  success:
+                    type: boolean
+                  answerStatus:
+                    type: string
+                    description: error message if not successful
+        400:
+          description: Invalid status value
+          content: {}
+
+  /pedidosUsuarix:
+    get: 
+      summary: Lista pedidos del Usuarix
+      operationId: getPedidos
+      parameters:
+        - in: query
+          name: idUsuarix
+          schema:
+            type: integer 
+          required: true
+          description: Id del usuarix
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Pedido'
+        400:
+          description: Invalid status value
+          content: {}
+
+#PRODUCTO CON POST GET PUT DELETE
+
+  /producto:
+    
+    post: 
+      summary: Crear producto
+      requestBody:
+        description: Creacion de producto
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                nombre:
+                  type: string
+                price:
+                  type: integer
+                shortname:
+                  type: string                
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ideUser:
+                    type: integer
+                  success:
+                    type: boolean
+                  answerStatus:
+                    type: string
+                    description: error message if not successful
+        400:
+          description: Invalid status value
+          content: {}
+
+    get: 
+        summary: Detalle del producto
+        operationId: getProducto
+        parameters:
+          - in: query
+            name: idProducto
+            schema:
+              type: integer 
+            required: true
+            description: Id del producto
+
+        responses:
+          200:
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: '#/components/schemas/Producto'
+          400:
+            description: Invalid status value
+            content: {}  
+
+    put:
+      summary: Actualiza el estado del producto
+      requestBody:
+        description: Data del estado del producto
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                id:
+                  type: integer
+                state:
+                  type: string
+        
+      responses:
+        200:
+          description: successful operation
+          content: {}
+        400:
+          description: Invalid status value
+          content: {}
+
+
+    delete:
+      summary: Borrar producto
+      requestBody:
+        description: Borrar producto
+        required: true
+        content:
+          application/json:
+            schema:              
+              type: object
+              properties:
+                id:
+                  type: integer
+                nombre:
+                  type: string
+
+      responses:
+          200:
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: '#/components/schemas/Producto'
+          400:
+            description: Invalid status value
+            content: {} 
+
+
+components:
+  schemas:
+    Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        price:
+          type: integer
+        shortname:
+          type: string
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        user:
+          type: string
+        mail:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: integer
+        price:
+          type: integer
+        description:
+          type: string
+        timestamp:
+          type: string
+        state:
+          type: string
+        payment:
+          type: string
+        productos:
+          type: array
+          items: 
+            $ref: '#/components/schemas/Producto'
+
+         
+ 
