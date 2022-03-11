@@ -69,7 +69,65 @@ app.post('/sign-up', (req, res) => {
 });
 
 app.get('/pedidoUsuarix', (req, res) => {
+    var idUsuarix = req.query.idUsuarix;
+    var query = "SELECT id, price, creationDate, state, paymentType \
+         FROM pedido \
+         WHERE id = ?";
 
+         if ((query = 'state = "Entregado"') => {
+            var listaPedido = []
+            //agregar pedidos anteriores
+            if (listaPedido.length > 0) {
+                listaPedido[0]
+            }
+         });
+
+         // A REVISAR E INDENTAR
+        connection.query(query, [idPedido], function (error, results) {
+           if (error) throw error;
+    
+           if(results.length > 0){
+               pedido = results[0];
+               res.status(200).send({
+                   id: pedido.id,
+                   price: pedido.price,
+                   description: "en un futuro habrá respuestas",
+                   state: pedido.state,
+                   creationDate: pedido.creationDate,                
+                   paymentType: pedido.paymentType,
+                    // productos: ???
+                });
+            } else {
+                res.status(400).send("No se encontro el pedido");
+            }
+        });
+});
+
+app.post('/favoritos', (req, res) => {
+
+});
+
+app.get('/favoritos', (req, res) => { //es una lista de favs???
+    var idProducto = req.query.idProducto;
+    var query = "SELECT id, nombre, precio \
+         FROM producto \
+         WHERE id = ?";
+         
+    connection.query(query, [idPedido], function (error, results) {
+        if (error) throw error;
+
+        if(results.length > 0){
+            pedido = results[0];
+            res.status(200).send({
+                id: producto.id,
+                nombre: producto.nombre,
+                price: producto.price,
+                //description: "en un futuro habrá respuestas",
+            });
+        } else {
+            res.status(400).send("No se encontro el producto");
+        }
+    });
 });
 
 app.post('/producto', (req, res) => {
@@ -77,7 +135,26 @@ app.post('/producto', (req, res) => {
 });
 
 app.get('/producto', (req, res) => {
+    var idProducto = req.query.idProducto;
+    var query = "SELECT id, nombre, nombreCorto, precio \
+         FROM producto \
+         WHERE id = ?";
+         
+    connection.query(query, [idPedido], function (error, results) {
+        if (error) throw error;
 
+        if(results.length > 0){
+            pedido = results[0];
+            res.status(200).send({
+                id: producto.id,
+                nombre: producto.nombre,
+                price: producto.price,
+                //description: "en un futuro habrá respuestas",
+            });
+        } else {
+            res.status(400).send("No se encontro el producto");
+        }
+    });
 });
 
 app.put('/producto', (req, res) => {

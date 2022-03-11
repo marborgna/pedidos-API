@@ -46,15 +46,16 @@ INSERT INTO producto VALUES (6, "Hamburguesa con jamón", "HamJam", 695);
 INSERT INTO producto VALUES (7, "Hamburguesa  especial", "HamEsp", 710);
 
 
-INSERT INTO pedido (id, idUsuario, paymentType, direccion, price)
-    VALUES (1, 43, "Tarjeta Debito", "Av Siempreviva 1234", 650);
+INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
+    VALUES (1, 43, "Tarjeta Debito", "Av Siempreviva 1234", "Entregado", 650);
 INSERT INTO pedido_producto (idPedido, idProducto, cantidad)
     VALUES (1, 4, 2);
 
-INSERT INTO pedido (id, idUsuario, paymentType, direccion, price)
-    VALUES (2, 55, "Efectivo", "Av las Rosas 444", 550);
+INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
+    VALUES (2, 55, "Efectivo", "Av las Rosas 444", "Preparando", 550);
 
-
+INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
+    VALUES (3, 23, "Tarjeta Credito", "Calle Falsa 123", "Entregado", 800)
 
 
 -----------------
