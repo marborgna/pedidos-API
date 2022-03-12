@@ -36,6 +36,12 @@ CREATE TABLE usuario (
     userPassword TEXT
 );
 
+CREATE TABLE favoritos (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idProducto INTEGER,
+    idUsuario INTEGER
+);
+
 
 INSERT INTO producto VALUES (1, "Hamburguesa clásica", "HamClas", 650);
 INSERT INTO producto VALUES (2, "Sandwich veggie", "SandVegg", 520);
