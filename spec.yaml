@@ -43,11 +43,21 @@ paths:
             schema:              
               type: object
               properties:
-                payment:
+                paymentType:
                   type: string
-                idUsuarix:
+                address:    
+                  type: string
+                idUsuario:
                   type: integer
-
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      quantity:
+                        type: integer
+                      idProducto:
+                        type: integer
 
       responses:
         200:
@@ -190,63 +200,6 @@ paths:
         400:
           description: Invalid status value
           content: {}
-
-  /favoritos:
-
-    post:
-      summary: Agregar a Favoritos
-      requestBody:
-        description: Agregar a Favoritos
-        required: true
-        content:
-          application/json:
-            schema:              
-              type: object
-              properties:
-                nombre:
-                  type: string
-                price:
-                  type: integer
-
-
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  idProducto:
-                    type: integer
-                  answer:
-                    type: boolean
-        400:
-            description: Invalid status value
-            content: {}
-
-    get: 
-      summary: Lista de Favoritos del Usuarix  #con el IdUsuario hago un get de la Lista de sus favs???
-      operationId: getFavs
-      parameters:
-        - in: query
-          name: idUsuarix
-          schema:
-            type: integer 
-          required: true
-          description: Id del Usuarix
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items: 
-                  $ref: '#/components/schemas/Usuario' 
-        400:
-          description: Invalid status value
-          content: {}     
 
   /producto:
     
@@ -397,8 +350,6 @@ components:
           type: integer
         price:
           type: integer
-        description:
-          type: string
         creationDate:
           type: string
         state:

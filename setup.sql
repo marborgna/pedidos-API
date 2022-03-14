@@ -36,12 +36,6 @@ CREATE TABLE usuario (
     userPassword TEXT
 );
 
-CREATE TABLE favoritos (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idProducto INTEGER,
-    idUsuario INTEGER
-);
-
 
 INSERT INTO producto VALUES (1, "Hamburguesa clásica", "HamClas", 650);
 INSERT INTO producto VALUES (2, "Sandwich veggie", "SandVegg", 520);
@@ -55,13 +49,15 @@ INSERT INTO producto VALUES (7, "Hamburguesa  especial", "HamEsp", 710);
 INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
     VALUES (1, 43, "Tarjeta Debito", "Av Siempreviva 1234", "Entregado", 650);
 INSERT INTO pedido_producto (idPedido, idProducto, cantidad)
-    VALUES (1, 4, 2);
+    VALUES (1, 4, 2), (1, 7, 1);
 
 INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
     VALUES (2, 55, "Efectivo", "Av las Rosas 444", "Preparando", 550);
+INSERT INTO pedido_producto (idPedido, idProducto, cantidad)
+    VALUES (2, 2, 999);
 
 INSERT INTO pedido (id, idUsuario, paymentType, direccion, state, price)
-    VALUES (3, 23, "Tarjeta Credito", "Calle Falsa 123", "Entregado", 800)
+    VALUES (3, 23, "Tarjeta Credito", "Calle Falsa 123", "Entregado", 800);
 
 
 -----------------
